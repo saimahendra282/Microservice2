@@ -10,6 +10,6 @@ public class MongoConfig {
 
     @Bean
     public MongoTemplate mongoTemplate() {
-        return new MongoTemplate(MongoClients.create("mongodb://localhost:27017"), "certificate-db");
+        return new MongoTemplate(MongoClients.create("mongodb+srv://bejawadasaimahendra:tHJW1BzKOSw1BwXQ@meec.7kphnfb.mongodb.net"), "certificate-db");
     }
 }
