@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/certificates")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://sdp-vo1.netlify.app/")
 public class CertificateController {
 
     @Autowired
