@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/peer-mappings")
-@CrossOrigin(origins = "http://localhost:3000") // React frontend URL
+@CrossOrigin(origins = "https://sdp-vo1.netlify.app/") // React frontend URL
 public class PeerMappingController {
 
     @Autowired
