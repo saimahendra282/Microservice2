@@ -12,7 +12,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         // Allow all origins, or limit it to specific origins like "http://localhost:3000"
         registry.addMapping("/api/**")
-                .allowedOrigins("http://localhost:3000") // Add frontend domain here
+                .allowedOrigins("https://sdp-vo1.netlify.app/") // Add frontend domain here
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // Allow specific methods
                 .allowedHeaders("*") // Allow all headers
                 .allowCredentials(true); // Allow credentials (e.g., cookies, authorization headers)
