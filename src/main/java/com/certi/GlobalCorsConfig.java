@@ -12,7 +12,7 @@ public class GlobalCorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         // Allow cross-origin requests to all APIs
         registry.addMapping("/api/**")  // Apply to all /api/* endpoints
-                .allowedOrigins("https://sdp-vo1.netlify.app/")  // Frontend URL
+                .allowedOrigins("*")  // Allow requests from any origin
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // Allowed HTTP methods
                 .allowedHeaders("*")  // Allow all headers
                 .allowCredentials(true);  // Allow credentials like cookies, authorization headers
