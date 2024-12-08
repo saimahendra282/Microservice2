@@ -12,11 +12,12 @@ public class WebConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**")
-                        .allowedOrigins("https://sdp-vo1.netlify.app")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
+                registry.addMapping("/api/**") // Map CORS configuration to all API endpoints
+                        .allowedOrigins("https://sdp-vo1.netlify.app") // Allow your frontend's origin
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allow these HTTP methods
+                        .allowedHeaders("Authorization", "Content-Type", "Accept") // Allow specific headers
+                        .allowCredentials(true) // Allow credentials (e.g., cookies, Authorization header)
+                        .maxAge(3600); // Cache preflight response for 1 hour
             }
         };
     }
