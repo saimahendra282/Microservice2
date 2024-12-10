@@ -117,30 +117,31 @@ public class CertificateController {
     }
     // Endpoint to upload certificate and files (PDF & badge image)
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadCertificate(
-            @RequestHeader("Authorization") String authorizationHeader, // Extract token from header
-            @RequestParam("name") String name,
-            @RequestParam("trackId") String trackId,
-            @RequestParam("trackUrl") String trackUrl,
-            @RequestParam("issuedBy") String issuedBy,
-            @RequestParam("issuedDate") String issuedDate,
-            @RequestParam("expiryDate") String expiryDate,
-            @RequestParam("pdfFile") MultipartFile pdfFile,
-            @RequestParam("badge") MultipartFile badge) {
+public ResponseEntity<String> uploadCertificate(
+        @RequestHeader("Authorization") String authorizationHeader,
+        @RequestParam("name") String name,
+        @RequestParam("trackId") String trackId,
+        @RequestParam("trackUrl") String trackUrl,
+        @RequestParam("issuedBy") String issuedBy,
+        @RequestParam("issuedDate") String issuedDate,
+        @RequestParam("expiryDate") String expiryDate,
+        @RequestParam("pdfFile") MultipartFile pdfFile,
+        @RequestParam("badge") MultipartFile badge) {
+    try {
+        System.out.println("Authorization Header: " + authorizationHeader);
+        System.out.println("Name: " + name + ", Track ID: " + trackId + ", Track URL: " + trackUrl);
+        System.out.println("PDF File: " + pdfFile.getOriginalFilename() + ", Badge File: " + badge.getOriginalFilename());
 
-        try {
-            // Extract the actual token by removing "Bearer " prefix
-            String token = authorizationHeader.replace("Bearer ", "");
+        // Further logic
+        String token = authorizationHeader.replace("Bearer ", "");
+        Certificate certificate = new Certificate(name, trackId, trackUrl, issuedBy, issuedDate, expiryDate);
+        certificateService.saveCertificate(token, certificate, pdfFile, badge);
 
-            // Create certificate object with basic details
-            Certificate certificate = new Certificate(name, trackId, trackUrl, issuedBy, issuedDate, expiryDate);
-
-            // Call the service method to save the certificate and upload files
-            certificateService.saveCertificate(token, certificate, pdfFile, badge);
-
-            return ResponseEntity.ok("Certificate uploaded successfully!");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error uploading files: " + e.getMessage());
-        }
+        return ResponseEntity.ok("Certificate uploaded successfully!");
+    } catch (Exception e) {
+        e.printStackTrace(); // Log the full stack trace
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error uploading files: " + e.getMessage());
     }
+}
+
 }
